@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corona SMS Tracker</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+        integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!--   <script>
+        const date = JSON.stringify(`<%= latestData.Date %>`)
+        document.getElementById('showDate').innerHTML = "Hello";
+    </script> -->
+
+    <% if (isSuccess) { %>
+    <script>
+        Swal.fire(
+            'Done!',
+            'Alert send to your mobile number!',
+            'success'
+        );
+    </script>
+    <% } %>
+
+    <div class="main-container container shadow p-3 mb-5 bg-white rounded">
+        <div class="jumbotron">
+            <h1 class="display-4">COVID19 SMS Tracker!</h1>
+            <p class="lead">Get free SMS alert on COVID19 Cases in India by SMS.</p>
+            <hr class="my-4">
+            <form action="/" method="post">
+                <input class="form-control" type="number" name="mobile" id="mobile"
+                    placeholder="Enter your mobile number" required>
+                <p class="lead">
+                    <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">Get alerts</button>
+                </p>
+            </form>
+        </div>
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title">Current COVID19 status in <%= latestData.Country %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" id="showDate"> <%= latestData.Date %> </h6>
+                    <p class="card-text alert alert-warning">Total confirmed: <%= latestData.Confirmed %></p>
+                    <p class="card-text alert alert-success">Total recovered: <%= latestData.Recovered %></p>
+                    <p class="card-text alert alert-primary">Total active: <%= latestData.Active %></p>
+                    <p class="card-text alert alert-danger">Total deaths: <%= latestData.Deaths %></p>
+                    <a href="https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest"
+                        class="card-link">Values may vary, depending on the source</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="javascripts/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
