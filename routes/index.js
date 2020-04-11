@@ -38,18 +38,7 @@ router.post('/', async (req, res, next) => {
     const messageBody = `Currently, ${recentData.Country} has a total of ${recentData.Confirmed} confirmed cases, ${recentData.Deaths} deaths and the good news is ${recentData.Recovered} recovered. Still ${recentData.Active} active cases. \nStay at home, stay safe!  :) \nPrathamesh`
 
     if (mobile) {
-
-
-      axios.get(`https://www.sms4india.com/api/v1/sendCampaign?apikey=DNT9E1OVNNGRJK9VEENEAL38AJJ69MDS&secret=UISF28FW4B2KPA67&usetype=stage&senderid=9657227905&phone=${mobile}&message=${messageBody}`)
-        .then(sms => {
-
-          return res.status(200).render('index', { isSuccess: true, latestData: recentData });
-
-        }).catch(error => {
-          return res.status(200).render('index', { isSuccess: false, latestData: recentData });
-        });
-
-      /*   client.api.messages.create({
+        client.api.messages.create({
           body: messageBody,
           to: '+91' + mobile,
           from: +12569789527
@@ -59,7 +48,7 @@ router.post('/', async (req, res, next) => {
         }).catch(error => {
           console.log(error);
           return res.status(200).render('index', { isSuccess: false, latestData: recentData });
-        }); */
+        });
     }
   } catch (error) {
     console.error(error);
