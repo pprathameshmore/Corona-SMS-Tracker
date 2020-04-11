@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
     if (mobile) {
 
 
-      axios.get(`https://www.sms4india.com/api/v1/sendCampaign?apikey=EVSTRK0TJRHR3MX2J92ESGOIWBQJQZL8&secret=N940ELY9MSVZJHPU&usetype=stage&senderid=9657227905&phone=${mobile}&message=${messageBody}`)
+      axios.get(`https://www.sms4india.com/api/v1/sendCampaign?apikey=DNT9E1OVNNGRJK9VEENEAL38AJJ69MDS&secret=UISF28FW4B2KPA67&usetype=stage&senderid=9657227905&phone=${mobile}&message=${messageBody}`)
         .then(sms => {
 
           return res.status(200).render('index', { isSuccess: true, latestData: recentData });
