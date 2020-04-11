@@ -7,7 +7,7 @@ const router = express.Router();
 const ACCOUNT_ID = process.env.ACCOUNT_ID;
 const API_KEY = process.env.API_KEY;
 
-const client = new twilio(ACCOUNT_ID, API_KEY);
+/* const client = new twilio(ACCOUNT_ID, API_KEY); */
 
 
 async function getCovidData() {
@@ -38,17 +38,28 @@ router.post('/', async (req, res, next) => {
     const messageBody = `Currently, ${recentData.Country} has a total of ${recentData.Confirmed} confirmed cases, ${recentData.Deaths} deaths and the good news is ${recentData.Recovered} recovered. Still ${recentData.Active} active cases. \nStay at home, stay safe!  :) \nPrathamesh`
 
     if (mobile) {
-      client.api.messages.create({
-        body: messageBody,
-        to: '+91' + mobile,
-        from: +12569789527
-      }).then(data => {
-        console.log('SMS Sent' + data);
-        return res.status(200).render('index', { isSuccess: true, latestData: recentData });
-      }).catch(error => {
-        console.log(error);
-        return res.status(200).render('index', { isSuccess: false, latestData: recentData });
-      });
+
+
+      axios.get(`https://www.sms4india.com/api/v1/sendCampaign?apikey=EVSTRK0TJRHR3MX2J92ESGOIWBQJQZL8&secret=N940ELY9MSVZJHPU&usetype=stage&senderid=9657227905&phone=${mobile}&message=${messageBody}`)
+        .then(sms => {
+
+          return res.status(200).render('index', { isSuccess: true, latestData: recentData });
+
+        }).catch(error => {
+          return res.status(200).render('index', { isSuccess: false, latestData: recentData });
+        });
+
+      /*   client.api.messages.create({
+          body: messageBody,
+          to: '+91' + mobile,
+          from: +12569789527
+        }).then(data => {
+          console.log('SMS Sent' + data);
+          return res.status(200).render('index', { isSuccess: true, latestData: recentData });
+        }).catch(error => {
+          console.log(error);
+          return res.status(200).render('index', { isSuccess: false, latestData: recentData });
+        }); */
     }
   } catch (error) {
     console.error(error);
